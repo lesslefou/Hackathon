@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "319597212868",
+    "firebase_url": "https://hackathon15-9121e-default-rtdb.firebaseio.com",
+    "project_id": "hackathon15-9121e",
+    "storage_bucket": "hackathon15-9121e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319597212868:android:765457caa00bb66a298591",
+        "android_client_info": {
+          "package_name": "lisa.duterte.hackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319597212868-51ch3eq0nmube5al8ip5lsr40p27afdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLRUAkHlvjHBLiwKW1gv08Ljeia-lDPsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319597212868-51ch3eq0nmube5al8ip5lsr40p27afdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
