@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
 
-public class Setting extends AppCompatActivity {
+
+public class Setting extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseReference mReference;
     String userId;
@@ -42,19 +45,24 @@ public class Setting extends AppCompatActivity {
         passwordT = findViewById(R.id.edit_password);
 
 
+        findViewById(R.id.btn_back_setting).setOnClickListener(this);
+        findViewById(R.id.btn_unsubscribe).setOnClickListener(this);
+        findViewById(R.id.changePassword).setOnClickListener(this);
+
         //Set all the information of the user from the database on the screen
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             userId = firebaseUser.getUid();
-            Log.v("userdId = ",userId);
+            Log.v("userId = ",userId);
 
-            mReference = FirebaseDatabase.getInstance().getReference("User").child(userId);
+            mReference = FirebaseDatabase.getInstance().getReference("User").child(userId).child("member");
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    String surname = dataSnapshot.child("surname").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
+                    String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+                    String surname = Objects.requireNonNull(dataSnapshot.child("surname").getValue()).toString();
+                    String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+                    Log.v("name= ", name);
                     nameT.setText(name);
                     surnameT.setText(surname);
                     emailT.setText(email);
@@ -67,14 +75,16 @@ public class Setting extends AppCompatActivity {
                 }
             });
 
-            //Go to the previous activity and close this page
+            /*//Go to the previous activity and close this page
             back = findViewById(R.id.btn_back);
             back.setOnClickListener(v -> finish());
 
             //Display dialog information
             unsubscribe = findViewById(R.id.btn_unsubscribe);
-            unsubscribe.setOnClickListener(v -> showInformationSavedDialog());
-        }
+            unsubscribe.setOnClickListener(v -> showInformationSavedDialog());*/
+
+
+       }
 
 
     }
@@ -150,5 +160,20 @@ public class Setting extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
+    //Go on the good page
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back_setting:
+                finish();
+                break;
 
+            case R.id.btn_unsubscribe:
+                showInformationSavedDialog();
+                break;
+
+            case R.id.changePassword:
+                startActivity(new Intent(this, ResetPassword.class));
+        }
+    }
 }

@@ -163,10 +163,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                     user.setSurname(surname);
                     user.setEmail(email);
 
-                    ArrayList<String> contactList = new ArrayList<>();
-                    user.setContactList(contactList);
-
-                    mReference.push().setValue(user);
+                    mReference.child("member").setValue(user);
                     startActivity(new Intent(SignUp.this, MainActivity.class));
                 } else {
                     Toast.makeText(SignUp.this, R.string.error + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

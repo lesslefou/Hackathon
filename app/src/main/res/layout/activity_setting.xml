@@ -109,7 +109,7 @@
             android:textSize="27sp" />
 
         <TextView
-            android:id="@+id/forgotPassword"
+            android:id="@+id/changePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/password"
@@ -128,11 +128,11 @@
         android:text="@string/unsubscribe"
         app:layout_constraintTop_toBottomOf="@id/relative"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintStart_toEndOf="@id/btn_back_setting"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_back_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
