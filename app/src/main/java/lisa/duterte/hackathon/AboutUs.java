@@ -1,26 +1,46 @@
 package lisa.duterte.hackathon;
-import android.view.View;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-public class AboutUs extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
-    private GoogleMap map;
+
+
+public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+
+        Button back = findViewById(R.id.backBtn);
+        back.setOnClickListener(v -> finish());
+
+        //Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //set the location of ISEN
+        LatLng isen = new LatLng(43.12064347637604, 5.939666736157341);
+        googleMap.addMarker(new MarkerOptions()
+                .position(isen)
+                .title("ISEN Toulon"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 12));
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -38,27 +58,12 @@ public class AboutUs extends AppCompatActivity implements OnMapReadyCallback, Vi
                 return super.onOptionsItemSelected(item);
         }
     }
+
     public void logout() {
         //FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(), FirstPage.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
-    }
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        LatLng isen = new LatLng(43.12064347637604, 5.939666736157341);
-        map.addMarker(new MarkerOptions()
-                .position(isen)
-                .title("Marker on ISEN"));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 12));
-    }
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.backBtn) {
-            finish();
-            startActivity(new Intent(this, FirstPage.class));
-        }
     }
 }
