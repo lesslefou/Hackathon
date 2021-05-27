@@ -51,12 +51,13 @@ import java.util.Objects;
                 mReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-                        String surname = Objects.requireNonNull(dataSnapshot.child("surname").getValue()).toString();
-                        String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String surname = dataSnapshot.child("surname").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
                         nameT.setText(name);
                         surnameT.setText(surname);
                         emailT.setText(email);
+                        passwordT.setText("*******");
                     }
 
                     @Override

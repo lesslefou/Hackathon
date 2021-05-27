@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutUs">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
     <TextView
         android:id="@+id/aboutUs"
         android:layout_width="wrap_content"
@@ -26,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"/>
-
 
     <TextView
         android:id="@+id/aboutUsText"
@@ -39,7 +36,6 @@
         app:layout_constraintBottom_toTopOf="@id/map"
         app:layout_constraintStart_toStartOf="@id/map"
         app:layout_constraintEnd_toEndOf="@id/map"/>
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -49,7 +45,6 @@
         app:layout_constraintBottom_toTopOf="@id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
@@ -59,6 +54,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
