@@ -2,23 +2,38 @@ package lisa.duterte.hackathon;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        findViewById(R.id.maprelative).setOnClickListener(this);
+        findViewById(R.id.historiqueRelative).setOnClickListener(this);
+        findViewById(R.id.statrelative).setOnClickListener(this);
     }
 
 
@@ -55,5 +70,24 @@ public class MainActivity extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.maprelative:
+                finish();
+                startActivity(new Intent(this, Map.class));
+                break;
+
+            case R.id.historiqueRelative:
+                finish();
+                startActivity(new Intent(this, Historique.class));
+                break;
+
+            case R.id.statrelative:
+                finish();
+                startActivity(new Intent(this, Statistiques.class));
+        }
     }
 }

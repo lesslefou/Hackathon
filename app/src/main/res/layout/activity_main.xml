@@ -6,6 +6,150 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/maprelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/historiqueRelative"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageMap"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/map_logo" />
+
+        <TextView
+            android:id="@+id/nameMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/imageMap"
+            android:layout_alignTop="@+id/imageMap"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="50dp"/>
+
+
+        <ImageView
+            android:id="@+id/showInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/page_next_outline"
+            android:layout_toEndOf="@id/imageMap"
+            android:layout_alignTop="@+id/imageMap"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="240dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/historiqueRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/maprelative"
+        app:layout_constraintBottom_toTopOf="@id/statrelative"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageHistorique"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/historique_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/nameHistorique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/historique"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/imageHistorique"
+            android:layout_alignTop="@+id/imageHistorique"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="50dp"/>
+
+
+        <ImageView
+            android:id="@+id/showInformation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/page_next_outline"
+            android:layout_toEndOf="@id/imageHistorique"
+            android:layout_alignTop="@+id/imageHistorique"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="240dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/statrelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historiqueRelative"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageStat"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/statistique_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/nameStat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistique"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/imageStat"
+            android:layout_alignTop="@+id/imageStat"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="50dp"/>
+
+
+        <ImageView
+            android:id="@+id/showInformation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/page_next_outline"
+            android:layout_toEndOf="@id/imageStat"
+            android:layout_alignTop="@+id/imageStat"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="240dp"
+            />
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

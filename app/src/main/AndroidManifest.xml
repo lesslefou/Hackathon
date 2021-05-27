@@ -9,16 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hackathon">
+        <activity android:name=".Statistiques"></activity>
+        <activity android:name=".Historique" />
+        <activity android:name=".Map" />
+        <activity android:name=".RecyclerViewAdapter" />
+        <activity android:name=".ActivitiesAdapter" />
+        <activity android:name=".ActivityAdapter" />
+        <activity android:name=".MainAdapter" />
+        <activity android:name=".MainFragment" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBaxripj9nwdbBW2E0f9mR_GLF59kUK9qk"/>
+            android:value="AIzaSyBaxripj9nwdbBW2E0f9mR_GLF59kUK9qk" />
 
-        <activity android:name=".ResetPassword"/>
+        <activity android:name=".ResetPassword" />
         <activity android:name=".Setting" />
         <activity android:name=".LogIn" />
         <activity android:name=".SignUp" />
-        <activity android:name=".AboutUs"/>
+        <activity android:name=".AboutUs" />
         <activity android:name=".MainActivity" />
         <activity android:name=".FirstPage">
             <intent-filter>

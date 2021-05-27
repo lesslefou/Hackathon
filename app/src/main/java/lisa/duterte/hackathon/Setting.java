@@ -161,6 +161,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         startActivity(i);
     }
     //Go on the good page
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -173,7 +174,10 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.changePassword:
-                startActivity(new Intent(this, ResetPassword.class));
+                Intent intent = new Intent(this, ResetPassword.class);
+                String message = getString(R.string.changePassword);
+                intent.putExtra("choix",message);
+                startActivity(intent);
         }
     }
 }

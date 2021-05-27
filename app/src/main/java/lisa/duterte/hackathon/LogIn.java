@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -95,7 +96,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.forgotPassword:
-                startActivity(new Intent(this, ResetPassword.class));
+                Intent intent = new Intent(this, ResetPassword.class);
+                String message = getString(R.string.resetPage);
+                intent.putExtra("choix",message);
+                startActivity(intent);
         }
     }
 
