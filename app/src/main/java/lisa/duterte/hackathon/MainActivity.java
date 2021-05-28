@@ -72,21 +72,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(i);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.maprelative:
-                finish();
                 startActivity(new Intent(this, Map.class));
                 break;
 
             case R.id.historiqueRelative:
-                finish();
                 startActivity(new Intent(this, Historique.class));
                 break;
 
             case R.id.statrelative:
-                finish();
                 startActivity(new Intent(this, Statistiques.class));
         }
     }

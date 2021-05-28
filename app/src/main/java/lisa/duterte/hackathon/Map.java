@@ -3,6 +3,7 @@ package lisa.duterte.hackathon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +18,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
+
+    Double longitude,latitude;
+    DatabaseReference mReference;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -38,12 +50,29 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        mReference = FirebaseDatabase.getInstance().getReference("CoordonneesDrone");
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                longitude = (Double) dataSnapshot.child("longitude").getValue();
+                latitude = (Double) dataSnapshot.child("latitude").getValue();
+                Log.v("longitude = ", String.valueOf(longitude));
+                Log.v("latitude = ", String.valueOf(latitude));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         //set the location of the drone
-        LatLng isen = new LatLng(43.12064347637604, 5.939666736157341);
+        LatLng isen = new LatLng(latitude, longitude);
         googleMap.addMarker(new MarkerOptions()
                 .position(isen)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.drone_logo))

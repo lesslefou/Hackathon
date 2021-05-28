@@ -31,7 +31,6 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     DatabaseReference mReference;
     String userId;
     TextView nameT, surnameT, emailT, passwordT;
-    Button back, unsubscribe;
 
 
     @Override
@@ -74,15 +73,6 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
                 }
             });
-
-            /*//Go to the previous activity and close this page
-            back = findViewById(R.id.btn_back);
-            back.setOnClickListener(v -> finish());
-
-            //Display dialog information
-            unsubscribe = findViewById(R.id.btn_unsubscribe);
-            unsubscribe.setOnClickListener(v -> showInformationSavedDialog());*/
-
 
        }
 
