@@ -3,6 +3,7 @@ package lisa.duterte.hackathon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +30,7 @@ import java.util.Objects;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
-    Double longitude,latitude;
+    Double longitude, latitude;
     DatabaseReference mReference;
 
     @Override
@@ -38,28 +40,46 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         return true;
     }
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
+       longitude = 0.0;
+       latitude = 0.0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
         Button back = findViewById(R.id.backBtn);
         back.setOnClickListener(v -> finish());
-
         //Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
 
-
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
         mReference = FirebaseDatabase.getInstance().getReference("CoordonneesDrone");
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                double long2 = 0, lat2 = 0;
                 longitude = (Double) dataSnapshot.child("longitude").getValue();
                 latitude = (Double) dataSnapshot.child("latitude").getValue();
+                if( lat2 != latitude || long2 != longitude)
+                {
+                    googleMap.clear();
+                }
                 Log.v("longitude = ", String.valueOf(longitude));
-                Log.v("latitude = ", String.valueOf(latitude));
+                Log.v("latitude1 = ", String.valueOf(latitude));
+
+                //set the location of the drone
+                LatLng isen = new LatLng(latitude, longitude);
+                googleMap.addMarker(new MarkerOptions()
+                        .position(isen)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.drone_logo))
+                        .title(String.valueOf(R.string.position_drone)));
+
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 14));
+                long2= longitude;
+                lat2 = latitude;
             }
 
             @Override
@@ -67,17 +87,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        //set the location of the drone
-        LatLng isen = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions()
-                .position(isen)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.drone_logo))
-                .title(String.valueOf(R.string.position_drone)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 14));
     }
 
     @SuppressLint("NonConstantResourceId")
