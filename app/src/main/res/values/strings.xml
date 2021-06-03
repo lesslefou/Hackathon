@@ -32,15 +32,7 @@
     <string name="setting">Paramètres</string>
     <string name="aboutUs">A propos</string>
     <string name="aboutUsText">Application créée lors du projet Hackathon au sein de l\'école ISEN Toulon. Conçu par Lisa Duterte, Alicia Lan et Clélia Gimond</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="welcome">"Bienvenue !"</string>
     <string name="emailSent">"Email envoyé"</string>
     <string name="error_log_in">Mauvais email ou mot de passe</string>
     <string name="welcomeUser">Bienvenue</string>
@@ -55,17 +47,17 @@
     <string name="position_drone">Position actuelle du drone : </string>
     <string name="mois">"Mois"</string>
     <string name="detections">"Nombre de sources de chaleur détectées"</string>
-    <string name="janvier">Janvier</string>
-    <string name="fevrier">Fevrier</string>
+    <string name="janvier">Jan</string>
+    <string name="fevrier">Fev</string>
     <string name="mars">Mars</string>
-    <string name="avril">Avril</string>
+    <string name="avril">Avr</string>
     <string name="mai">Mai</string>
     <string name="juin">Juin</string>
-    <string name="juillet">Juillet</string>
+    <string name="juillet">Juil</string>
     <string name="aout">Aout</string>
-    <string name="septembre">Septembre</string>
-    <string name="octobre">Octobre</string>
-    <string name="novembre">Novembre</string>
-    <string name="decembre">Decembre</string>
+    <string name="septembre">Sept</string>
+    <string name="octobre">Oct</string>
+    <string name="novembre">Nov</string>
+    <string name="decembre">Dec</string>
 
 </resources>

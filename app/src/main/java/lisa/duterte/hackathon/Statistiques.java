@@ -43,18 +43,18 @@ public class Statistiques extends AppCompatActivity {
         BarDataSet bardataset = new BarDataSet(entries, "Cells");
 
         ArrayList<String> labels = new ArrayList<>();
-        labels.add("Jan");
-        labels.add("Feb");
-        labels.add("Mar");
-        labels.add("Apr");
-        labels.add("May");
-        labels.add("Jun");
-        labels.add("Jul");
-        labels.add("Aug");
-        labels.add("Sep");
-        labels.add("Oct");
-        labels.add("Nov");
-        labels.add("Dec");
+        labels.add(String.valueOf(R.string.janvier));
+        labels.add(String.valueOf(R.string.fevrier));
+        labels.add(String.valueOf(R.string.mars));
+        labels.add(String.valueOf(R.string.avril));
+        labels.add(String.valueOf(R.string.mai));
+        labels.add(String.valueOf(R.string.juin));
+        labels.add(String.valueOf(R.string.juillet));
+        labels.add(String.valueOf(R.string.aout));
+        labels.add(String.valueOf(R.string.septembre));
+        labels.add(String.valueOf(R.string.octobre));
+        labels.add(String.valueOf(R.string.novembre));
+        labels.add(String.valueOf(R.string.decembre));
 
         BarData data = new BarData(labels, bardataset);
         barChart.setData(data); // set the data and list of labels into chart
