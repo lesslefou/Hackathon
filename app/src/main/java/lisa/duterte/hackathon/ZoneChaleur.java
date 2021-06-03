@@ -2,33 +2,33 @@ package lisa.duterte.hackathon;
 
 public class ZoneChaleur {
 
-    String date ;
-    String heure ;
+    String dateheure ;
     String position ;
+    Long temperature;
 
     public ZoneChaleur() {
     }
 
-    public ZoneChaleur(String date, String heure, String position) {
-        this.date = date;
-        this.heure = heure;
+    public ZoneChaleur(String dateheure, String position,Long temperature) {
+        this.dateheure = dateheure;
         this.position = position;
+        this.temperature = temperature;
     }
 
-    public String getDate() {
-        return date;
+    public Long getTemperature() {
+        return temperature;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTemperature(Long temperature) {
+        this.temperature = temperature;
     }
 
-    public String getHeure() {
-        return heure;
+    public String getDateHeure() {
+        return dateheure;
     }
 
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public void setDateHeure(String date) {
+        this.dateheure = date;
     }
 
     public String getPosition() {

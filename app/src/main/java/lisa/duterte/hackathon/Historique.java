@@ -42,7 +42,7 @@ public class Historique extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     zoneChaleur = child.getValue(ZoneChaleur.class);
 
-                    arrayList.add(zoneChaleur.getDate() +  " - " + zoneChaleur.getHeure() + " : " + zoneChaleur.getPosition());
+                    arrayList.add(zoneChaleur.getDateHeure() +  "  :  " + zoneChaleur.getPosition() + "  temp : " + zoneChaleur.getTemperature());
                 }
                 arrayAdapter.notifyDataSetChanged();
             }

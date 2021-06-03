@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,10 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         findViewById(R.id.maprelative).setOnClickListener(this);
         findViewById(R.id.historiqueRelative).setOnClickListener(this);
         findViewById(R.id.statrelative).setOnClickListener(this);
+
+
+        AsyncJsonData task = new AsyncJsonData(MainActivity.this);
+        task.execute("cse-in/forestDrone/droneData/environement");
+
+
     }
 
 

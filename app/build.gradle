@@ -26,6 +26,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
 }
 
 dependencies {
@@ -46,5 +49,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.0'
 
     //implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+    //Implémentation du serveur
+    implementation "io.ktor:ktor:1.2.5"
+    implementation "io.ktor:ktor-server-netty:1.2.5"
+    implementation "io.ktor:ktor-gson:1.2.5"
+
 }
 apply plugin: 'com.google.gms.google-services'
