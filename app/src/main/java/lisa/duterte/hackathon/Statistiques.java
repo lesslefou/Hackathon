@@ -2,7 +2,17 @@ package lisa.duterte.hackathon;
 
 
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 
 public class Statistiques extends AppCompatActivity {
@@ -12,54 +22,47 @@ public class Statistiques extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistiques);
 
-        /*Layout :
-        <com.anychart.AnyChartView
-        android:id="@+id/any_chart_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-         */
+        Button back = findViewById(R.id.backBtn);
+        back.setOnClickListener(v -> finish());
+        BarChart barChart = findViewById(R.id.barchart);
 
-        /*
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(8f, 0));
+        entries.add(new BarEntry(2f, 1));
+        entries.add(new BarEntry(5f, 2));
+        entries.add(new BarEntry(20f, 3));
+        entries.add(new BarEntry(15f, 4));
+        entries.add(new BarEntry(19f, 5));
+        entries.add(new BarEntry(8f, 6));
+        entries.add(new BarEntry(2f, 7));
+        entries.add(new BarEntry(5f, 8));
+        entries.add(new BarEntry(20f, 9));
+        entries.add(new BarEntry(15f, 10));
+        entries.add(new BarEntry(19f, 11));
 
-        Cartesian cartesian = AnyChart.column();
+        BarDataSet bardataset = new BarDataSet(entries, "Cells");
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Rouge", 80540));
-        data.add(new ValueDataEntry("Foundation", 94190));
-        data.add(new ValueDataEntry("Mascara", 102610));
-        data.add(new ValueDataEntry("Lip gloss", 110430));
-        data.add(new ValueDataEntry("Lipstick", 128000));
-        data.add(new ValueDataEntry("Nail polish", 143760));
-        data.add(new ValueDataEntry("Eyebrow pencil", 170670));
-        data.add(new ValueDataEntry("Eyeliner", 213210));
-        data.add(new ValueDataEntry("Eyeshadows", 249980));
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("Jan");
+        labels.add("Feb");
+        labels.add("Mar");
+        labels.add("Apr");
+        labels.add("May");
+        labels.add("Jun");
+        labels.add("Jul");
+        labels.add("Aug");
+        labels.add("Sep");
+        labels.add("Oct");
+        labels.add("Nov");
+        labels.add("Dec");
 
-        Column column = cartesian.column(data);
+        BarData data = new BarData(labels, bardataset);
+        barChart.setData(data); // set the data and list of labels into chart
 
-        column.tooltip()
-                .titleFormat("{%X}")
-                .position(Position.CENTER_BOTTOM)
-                .anchor(Anchor.CENTER_BOTTOM)
-                .offsetX(0d)
-                .offsetY(5d)
-                .format("${%Value}{groupsSeparator: }");
+        barChart.setDescription("Expenditure for the year 2018");  // set the description
 
-        cartesian.animation(true);
-        cartesian.title("Top 10 Cosmetic Products by Revenue");
+        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
-        cartesian.yScale().minimum(0d);
-
-        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
-
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        cartesian.interactivity().hoverMode(HoverMode.BY_X);
-
-        cartesian.xAxis(0).title("Product");
-        cartesian.yAxis(0).title("Revenue");
-
-        anyChartView.setChart(cartesian);*/
+        barChart.animateY(5000);
     }
 }

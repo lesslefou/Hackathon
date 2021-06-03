@@ -98,8 +98,8 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject> {
             JSONObject hello = s.getJSONObject("m2m:env");
 
 
-            pos_la = hello.getDouble("tp");
-            pos_lo = hello.getDouble("tp");
+            pos_la = hello.getJSONObject("latitude").getDouble("d") + hello.getJSONObject("latitude").getDouble("m")/60 + hello.getJSONObject("latitude").getDouble("s")/360;
+            pos_lo = hello.getJSONObject("longitude").getDouble("d") + hello.getJSONObject("latitude").getDouble("m")/60 + hello.getJSONObject("latitude").getDouble("s")/360;
             temperature = hello.getLong("tp");
 
 

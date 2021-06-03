@@ -30,7 +30,7 @@ import java.util.Objects;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
-    Double longitude, latitude;
+    Double longitude=0.0, latitude=0.0;
     DatabaseReference mReference;
 
     @Override
@@ -60,9 +60,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                double long2 = 0, lat2 = 0;
-                longitude = (Double) dataSnapshot.child("longitude").getValue();
-                latitude = (Double) dataSnapshot.child("latitude").getValue();
+                Double long2 = 0.0, lat2 = 0.0;
+                try {
+                    longitude = (Double) dataSnapshot.child("longitude").getValue();
+                    latitude = (Double) dataSnapshot.child("latitude").getValue();
+                }
+                catch (ClassCastException e) {
+                    Log.v("erreur de cast long to double","");
+                }
+
                 if( lat2 != latitude || long2 != longitude)
                 {
                     googleMap.clear();
@@ -78,8 +84,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                         .title(String.valueOf(R.string.position_drone)));
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 14));
-                long2= longitude;
-                lat2 = latitude;
             }
 
             @Override
