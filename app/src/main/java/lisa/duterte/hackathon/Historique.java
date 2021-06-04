@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -30,6 +31,9 @@ public class Historique extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historique);
 
+        ImageView back = findViewById(R.id.backBtn);
+        back.setOnClickListener(v -> finish());
+
         listView = findViewById(R.id.listView);
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
@@ -41,7 +45,6 @@ public class Historique extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     zoneChaleur = child.getValue(ZoneChaleur.class);
-
                     arrayList.add(zoneChaleur.getDateHeure() +  "  :  " + zoneChaleur.getPosition() + "  temp : " + zoneChaleur.getTemperature());
                 }
                 arrayAdapter.notifyDataSetChanged();

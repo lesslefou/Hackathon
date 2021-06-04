@@ -12,6 +12,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +35,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     Double longitude=0.0, latitude=0.0;
     DatabaseReference mReference;
+    TextView coordDrone;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,7 +50,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
        latitude = 0.0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        Button back = findViewById(R.id.backBtn);
+        coordDrone = findViewById(R.id.coordDrone);
+
+
+        ImageView back = findViewById(R.id.backBtn);
         back.setOnClickListener(v -> finish());
         //Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -75,6 +82,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 }
                 Log.v("longitude = ", String.valueOf(longitude));
                 Log.v("latitude1 = ", String.valueOf(latitude));
+                String coordonnee = "(" + latitude + "," + longitude + ")";
+                coordDrone.setText(coordonnee);
 
                 //set the location of the drone
                 LatLng isen = new LatLng(latitude, longitude);

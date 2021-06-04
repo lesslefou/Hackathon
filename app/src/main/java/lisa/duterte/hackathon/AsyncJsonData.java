@@ -28,24 +28,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class AsyncJsonData extends AsyncTask<String, Void, JSONObject> {
+public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
 
     private AppCompatActivity myActivity;
     DatabaseReference databaseReference;
-    JSONArray items;
     Double pos_la,pos_lo;
     Long temperature = 40l;
     ZoneChaleur zoneChaleur;
     PositionDrone positionDrone;
     Integer temperatureFeu = 40;
 
-    public AsyncJsonData(AppCompatActivity mainActivity) {
+    public AsyncJsonData(AppCompatActivity mainActivity ) {
         myActivity = mainActivity;
     }
 
@@ -67,11 +67,15 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject> {
             urlConnection.addRequestProperty("X-M2M-RI","0");
             urlConnection.addRequestProperty("X-M2M-RVI","3");
 
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
+                result = readStream(in); // Read stream
 
-            result = readStream(in); // Read stream
+                System.out.println(result);
+            }catch (ConnectException e) {
+                System.out.println("erreur");
+            }
 
-            System.out.println(result);
         }
         catch (MalformedURLException e) { e.printStackTrace(); }
         catch (IOException e) {
