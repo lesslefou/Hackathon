@@ -48,16 +48,6 @@
     <string name="position_drone"> Current position of the drone : </string>
     <string name="mois">"Months"</string>
     <string name="detections">" Number of heat sources detected "</string>
-    <string name="janvier">Jan</string>
-    <string name="fevrier">Feb</string>
-    <string name="mars">Mar</string>
-    <string name="avril">Apr</string>
-    <string name="mai">May</string>
-    <string name="juin">Jun</string>
-    <string name="juillet">Jul</string>
-    <string name="aout">Aug</string>
-    <string name="septembre">Sep</string>
-    <string name="octobre">Oct</string>
-    <string name="novembre">Nov</string>
-    <string name="decembre">Dec</string>
+    <string name="ok">OK</string>
+    <string name="progressData">Loading Data</string>
 </resources>

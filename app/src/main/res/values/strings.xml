@@ -47,17 +47,7 @@
     <string name="position_drone">Position actuelle du drone : </string>
     <string name="mois">"Mois"</string>
     <string name="detections">"Nombre de sources de chaleur détectées"</string>
-    <string name="janvier">Jan</string>
-    <string name="fevrier">Fev</string>
-    <string name="mars">Mars</string>
-    <string name="avril">Avr</string>
-    <string name="mai">Mai</string>
-    <string name="juin">Juin</string>
-    <string name="juillet">Juil</string>
-    <string name="aout">Aout</string>
-    <string name="septembre">Sept</string>
-    <string name="octobre">Oct</string>
-    <string name="novembre">Nov</string>
-    <string name="decembre">Dec</string>
+    <string name="ok">OK</string>
+    <string name="progressData">Téléchargement des données</string>
 
 </resources>
