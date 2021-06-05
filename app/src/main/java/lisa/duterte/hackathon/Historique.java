@@ -39,6 +39,7 @@ public class Historique extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
         zoneChaleur = new ZoneChaleur();
 
+        //Récupération des données de la bdd avec affichage
         databaseReference = FirebaseDatabase.getInstance().getReference("Historique");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

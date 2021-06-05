@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,10 +53,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map);
         coordDrone = findViewById(R.id.coordDrone);
 
-
         ImageView back = findViewById(R.id.backBtn);
         back.setOnClickListener(v -> finish());
-        //Obtain the SupportMapFragment and get notified when the map is ready to be used
+
+       //Obtention  du SupportMapFragment avec notification quand la map est prête à être utilisée
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -68,6 +69,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Double long2 = 0.0, lat2 = 0.0;
+                //on récupère la position du drone via la bdd
                 try {
                     longitude = (Double) dataSnapshot.child("longitude").getValue();
                     latitude = (Double) dataSnapshot.child("latitude").getValue();
@@ -76,16 +78,16 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     Log.v("erreur de cast long to double","");
                 }
 
+                //Permet de ne pas avoir de doublons de curseur drone
                 if( lat2 != latitude || long2 != longitude)
                 {
                     googleMap.clear();
                 }
-                Log.v("longitude = ", String.valueOf(longitude));
-                Log.v("latitude1 = ", String.valueOf(latitude));
-                String coordonnee = "(" + latitude + "," + longitude + ")";
+
+               String coordonnee = "(" + latitude + "," + longitude + ")";
                 coordDrone.setText(coordonnee);
 
-                //set the location of the drone
+                //Applique les coordonnées du drone
                 LatLng isen = new LatLng(latitude, longitude);
                 googleMap.addMarker(new MarkerOptions()
                         .position(isen)
@@ -102,6 +104,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
 
+    //Permet de gérer le clique sur le menu
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -121,8 +124,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    //Déconnection de l'utilisateur
     public void logout() {
-        //FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(), FirstPage.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

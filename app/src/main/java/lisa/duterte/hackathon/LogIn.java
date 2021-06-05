@@ -28,19 +28,18 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_log_in);
 
 
-        mAuth = FirebaseAuth.getInstance();
-
         editTextEmail = findViewById(R.id.edit_email);
         editTextPassword = findViewById(R.id.edit_password);
-
         progressBar = findViewById(R.id.progressBar);
 
-        //If the user didn't log out he will not see this page, he will directly go on the welcome page
+        mAuth = FirebaseAuth.getInstance();
+        //Si l'utilisateur ne s'est pas déconnecté, il ne verra pas cette page et sera redirigé directement à MAinActivity
         if (mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
 
+        //Mise à l'écoute des boutons et du texteView
         findViewById(R.id.btn_back).setOnClickListener(this);
         findViewById(R.id.btn_log).setOnClickListener(this);
         findViewById(R.id.forgotPassword).setOnClickListener(this);
@@ -48,26 +47,29 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
 
 
     private void userLogin() {
+        // Converti les editText en String
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        //Sent error is it empty
+        //Envoi une erreur si la String est nulle
         if (email.isEmpty()) {
             editTextEmail.setError(getString(R.string.notEmail));
             editTextEmail.requestFocus();
             return;
         }
 
-        //Sent error is it empty
+        //Envoi une erreur si la String est nulle
         if (password.isEmpty()) {
             editTextPassword.setError(getString(R.string.notPassword));
             editTextPassword.requestFocus();
             return;
         }
 
+        //ProgressBar active tant que les données ne sont pas chargées
         progressBar.setVisibility(View.VISIBLE);
 
-        //Sent error is the information are wrong or go in the welcome page
+        //Affichage d'un toast Erreur si toutes les infos ne sont pas remplies ou si elles sont fausses
+        //Redirection vers la MainActivity si ok
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -82,7 +84,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
-    //Go on the good page
+    //Gestion des cliques sur les 2 boutons + TextView
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

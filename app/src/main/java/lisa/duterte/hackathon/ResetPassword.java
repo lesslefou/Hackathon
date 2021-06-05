@@ -18,8 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPassword extends AppCompatActivity {
-
-
     String data = "";
     EditText emailText;
     Button reset;
@@ -34,11 +32,11 @@ public class ResetPassword extends AppCompatActivity {
 
         maintitle = findViewById(R.id.title);
 
+        //Récupération de la donnée envoyée via la page Setting ou LogIn pour permettre de modifier le type de phrase à afficer
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             data= extras.getString("choix","defaultValue");
         }
-        Log.v("choixrecu, ", data);
         maintitle.setText(data);
 
         progressBar = findViewById(R.id.progressBar);
@@ -46,7 +44,7 @@ public class ResetPassword extends AppCompatActivity {
         emailText = findViewById(R.id.emailField);
         mAuth = FirebaseAuth.getInstance();
 
-        //Send the email to reset the password
+        //Envoie d'un mail pour réinitialiser ou modifier le mot de passe
         reset.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);

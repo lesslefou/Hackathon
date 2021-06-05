@@ -14,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
@@ -26,7 +27,7 @@ public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
         Button back = findViewById(R.id.backBtn);
         back.setOnClickListener(v -> finish());
 
-        //Obtain the SupportMapFragment and get notified when the map is ready to be used
+        //Obtention  du SupportMapFragment avec notification quand la map est prête à être utilisée
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -34,7 +35,7 @@ public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //set the location of ISEN
+        //applique la localisation de l'ISEN
         LatLng isen = new LatLng(43.12064347637604, 5.939666736157341);
         googleMap.addMarker(new MarkerOptions()
                 .position(isen)
@@ -42,6 +43,7 @@ public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 12));
     }
 
+    //Permet de gérer les cliques sur le menu
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -61,8 +63,9 @@ public class AboutUs extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
+    //Déconnection de l'utilisateur
     public void logout() {
-        //FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(), FirstPage.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

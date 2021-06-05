@@ -21,6 +21,7 @@ public class FirstPage extends AppCompatActivity implements View.OnClickListener
         return true;
     }
 
+    //Permet de gérer le clique sur le menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -37,6 +38,7 @@ public class FirstPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
+        //Mise à l'écoute des 2 boutons
         View signUp = findViewById(R.id.btn_sign);
         signUp.setOnClickListener(this);
         View logIn = findViewById(R.id.btn_log);
@@ -44,7 +46,7 @@ public class FirstPage extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    //Go to the good activity
+    //Gestion des cliques sur les 2 boutons
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {

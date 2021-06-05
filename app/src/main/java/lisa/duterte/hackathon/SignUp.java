@@ -25,14 +25,12 @@ import java.util.Objects;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
     String confirmationKey = "HACKATHON15";
-
     EditText editTextEmail, editTextPassword, editTextName, editTextSurname, editTextConfPassword, editTextKey;
 
     boolean validPassword = false, validConfPassword = false, validKey = false;
     boolean hasNumbers = false;
     boolean hasLowerCase = false;
     boolean hasUpperCase = false;
-
 
     FirebaseAuth mAuth;
     FirebaseFirestore fstore;
@@ -54,17 +52,20 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         editTextPassword =findViewById(R.id.edit_password);
         editTextKey = findViewById(R.id.edit_key);
 
+        //Connection à la bdd + service d'identification
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
         progressBar = findViewById(R.id.progressBar);
 
+        //Mise à l'écoute des 2 boutons
         findViewById(R.id.btn_back).setOnClickListener(this);
         findViewById(R.id.btn_validate).setOnClickListener(this);
     }
 
     private void registerUser() {
+        // Converti les editText en String
         final String name = editTextName.getText().toString().trim();
         final String surname = editTextSurname.getText().toString().trim();
         final String confPassword = editTextConfPassword.getText().toString().trim();
@@ -72,15 +73,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         final String password = editTextPassword.getText().toString().trim();
         final String key = editTextKey.getText().toString().trim();
 
+
+        //Envoi une erreur si la String est nulle
         if (name.isEmpty() ){
             editTextName.setError(getString(R.string.notName));
             editTextName.requestFocus();
         }
+        //Envoi une erreur si la String est nulle
         if (surname.isEmpty() ){
             editTextSurname.setError(getString(R.string.notSurname));
             editTextSurname.requestFocus();
         }
-
+        //Envoi une erreur si la String est nulle
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editTextEmail.setError(getString(R.string.wrongEmail));
             editTextEmail.requestFocus();
@@ -93,6 +97,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         hasLowerCase = false;
         hasUpperCase = false;
 
+        //Vérifie que le mot de passe contient bien une lettre en majuscule, en minuscule et un chiffre
         for (int i = 0; i < password.length(); i++) {
             if (Character.isDigit(password.charAt(i))) {
                 hasNumbers = true;
@@ -102,20 +107,24 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                 hasUpperCase = true;
             }
         }
+        //Vérifie en plus que le mot de passe possède au moins 8 charactères
         if (hasNumbers && hasLowerCase && hasUpperCase && (password.length() >= 8)) {
             validPassword = true;
         }
 
+        //Envoi une erreur si le mot de passe ne possède pas toutes les conditions à respecter
         if (!validPassword) {
             editTextPassword.setError((getString(R.string.wrongPassword)));
             editTextPassword.requestFocus();
         }
 
+        //Envoi une erreur si confPassword est nul
         if (confPassword.isEmpty() ){
             editTextConfPassword.setError(getString(R.string.notConfPassword));
             editTextConfPassword.requestFocus();
         }
 
+        //Envoi une erreur si confPassword n'est pas égale à password
         if (!confPassword.isEmpty()) {
             if (!confPassword.equals(password)) {
                 editTextConfPassword.setError(getString(R.string.notGoodConfPassword));
@@ -127,11 +136,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             }
         }
 
+        //Envoi une erreur si la String est nulle
         if (key.isEmpty() ){
             editTextKey.setError(getString(R.string.notKey));
             editTextKey.requestFocus();
         }
         else {
+            //Vérifie qu'il s'agit de la bonne clé de confirmation
             if (key.equals(confirmationKey)) {
                 validKey = true;
             }
@@ -141,8 +152,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             }
         }
 
+        //Si toute les conditions sont respectés alors on enregistre l'utilisateur
         if (!name.isEmpty() && !surname.isEmpty() && validConfPassword && !email.isEmpty() && validPassword && validKey) {
 
+            //ProgressBar active tant que les données ne sont pas chargées
             progressBar.setVisibility(View.VISIBLE);
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -177,6 +190,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+    //Gestion des cliques sur les 2 boutons
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {

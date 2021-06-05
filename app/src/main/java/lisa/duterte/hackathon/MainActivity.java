@@ -31,11 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Mise à l'écoute des 3 catégories de page
         findViewById(R.id.maprelative).setOnClickListener(this);
         findViewById(R.id.historiqueRelative).setOnClickListener(this);
         findViewById(R.id.statrelative).setOnClickListener(this);
 
-
+        //Récupération des données des capteurs fournies par le serveur oneM2M
         AsyncJsonData task = new AsyncJsonData(MainActivity.this);
         task.execute("cse-in/forestDrone/droneData/environement");
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    //Permet de gérer le clique sur le menu
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    //Déconnection de l'utilisateur
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(),FirstPage.class);
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(i);
     }
 
+    //Gestion des cliques sur les 3 catégories de pages
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {

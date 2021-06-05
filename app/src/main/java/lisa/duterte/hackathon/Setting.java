@@ -43,17 +43,15 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         emailT = findViewById(R.id.edit_email);
         passwordT = findViewById(R.id.edit_password);
 
-
+        // Mise à l'écoute des 2 boutons + TextView
         findViewById(R.id.btn_back_setting).setOnClickListener(this);
         findViewById(R.id.btn_unsubscribe).setOnClickListener(this);
         findViewById(R.id.changePassword).setOnClickListener(this);
 
-        //Set all the information of the user from the database on the screen
+        //Affiche les données de l'utilisateur récupérer via la bdd à l'écran
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             userId = firebaseUser.getUid();
-            Log.v("userId = ",userId);
-
             mReference = FirebaseDatabase.getInstance().getReference("User").child(userId).child("member");
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -69,14 +67,9 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
             });
-
        }
-
-
     }
 
     @Override
@@ -86,6 +79,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
+    //Message de confirmation à la désinscription à l'application
     protected void showInformationSavedDialog() {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
@@ -100,7 +94,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         alert.show();
     }
 
-    //Delete the user and its information from the database
+    //Supprime l'utilisateur et ses informations de la bdd + renvoie sur la page d'accueil de l'application
     protected void deleteUSer() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseUser.delete().addOnCompleteListener(task -> {
@@ -123,6 +117,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+    //Permet de gérer le clique sur le menu
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -142,7 +137,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
+    // Déconnection de l'utilisateur
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(), FirstPage.class);
@@ -150,7 +145,8 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
-    //Go on the good page
+
+    //Gestion des cliques sur les 2 boutons + TextView
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
