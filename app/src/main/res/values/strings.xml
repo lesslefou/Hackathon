@@ -49,5 +49,7 @@
     <string name="detections">"Nombre de sources de chaleur détectées"</string>
     <string name="ok">OK</string>
     <string name="progressData">Téléchargement des données</string>
+    <string name="emailNotVerify">Vous n\'avez pas confirmé votre adresse mail. Vous trouverez le mail peut être dans vos SPAMS</string>
+    <string name="needEmailVerification">Vous devez maintenant confirmer votre adresse mail</string>
 
 </resources>

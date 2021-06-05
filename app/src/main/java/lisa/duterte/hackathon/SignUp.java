@@ -152,7 +152,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             }
         }
 
-        //Si toute les conditions sont respectés alors on enregistre l'utilisateur
+        //Si toute les conditions sont respectés alors on enregistre l'utilisateur et on le redirige sur la page de connection
         if (!name.isEmpty() && !surname.isEmpty() && validConfPassword && !email.isEmpty() && validPassword && validKey) {
 
             //ProgressBar active tant que les données ne sont pas chargées
@@ -177,7 +177,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                     user.setEmail(email);
 
                     mReference.child("member").setValue(user);
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    Toast.makeText(SignUp.this, R.string.needEmailVerification, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignUp.this, LogIn.class));
                 } else {
                     Toast.makeText(SignUp.this, R.string.error + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);

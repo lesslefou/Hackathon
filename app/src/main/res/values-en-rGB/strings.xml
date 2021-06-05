@@ -50,4 +50,6 @@
     <string name="detections">" Number of heat sources detected "</string>
     <string name="ok">OK</string>
     <string name="progressData">Loading Data</string>
+    <string name="emailNotVerify">You have not confirmed your email address. You may find the email in your SPAMS</string>
+    <string name="needEmailVerification">You now need to confirm your email</string>
 </resources>
