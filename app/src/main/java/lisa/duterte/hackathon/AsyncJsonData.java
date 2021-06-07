@@ -144,7 +144,6 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
 
                 }
             });
-            //sendActuatorRequest(s);
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("CoordonneesDrone");
@@ -167,41 +166,6 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
 
     }
 
-    /*private OutputStream sendActuatorRequest (String s) {
-        URL url = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            url = new URL("http","192.168.43.167",8080,strings[0]);
-
-            urlConnection = (HttpURLConnection) url.openConnection(); // Open
-            urlConnection.setRequestMethod("POST");
-            urlConnection.addRequestProperty("User-Agent","ACME 0.7.3");
-            urlConnection.addRequestProperty("Content-Type","application/json");
-            urlConnection.addRequestProperty("Accept","application/json");
-            urlConnection.addRequestProperty("X-M2M-Origin","CAdmin");
-            urlConnection.addRequestProperty("X-M2M-RI","0");
-            urlConnection.addRequestProperty("X-M2M-RVI","3");
-
-            try {
-                OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-                writeStream(out);
-
-            } catch (ConnectException e) {
-                System.out.println("erreur");
-            } finally {
-                urlConnection.disconnect();
-            }
-
-        }
-        catch (MalformedURLException e) { e.printStackTrace(); }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    /*private void writeStream(OutputStream out) {
-
-    }*/
 
     private String readStream(InputStream is) throws IOException {
         StringBuilder sb = new StringBuilder();
