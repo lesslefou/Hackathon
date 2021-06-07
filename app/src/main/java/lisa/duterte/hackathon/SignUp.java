@@ -178,6 +178,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
                     mReference.child("member").setValue(user);
                     Toast.makeText(SignUp.this, R.string.needEmailVerification, Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(SignUp.this, LogIn.class));
                 } else {
                     Toast.makeText(SignUp.this, R.string.error + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

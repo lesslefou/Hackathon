@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -104,8 +105,14 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
             JSONObject hello = s.getJSONObject("m2m:env");
 
 
-            pos_la = hello.getJSONObject("latitude").getDouble("d") + hello.getJSONObject("latitude").getDouble("m")/60 + hello.getJSONObject("latitude").getDouble("s")/360;
-            pos_lo = hello.getJSONObject("longitude").getDouble("d") + hello.getJSONObject("latitude").getDouble("m")/60 + hello.getJSONObject("latitude").getDouble("s")/360;
+            pos_la = hello.getJSONObject("latitude").getDouble("d") + hello.getJSONObject("latitude").getDouble("m")/60f + (hello.getJSONObject("latitude").getDouble("s") + hello.getJSONObject("latitude").getDouble("ms")/1000f)/(3600f);
+            pos_lo = hello.getJSONObject("longitude").getDouble("d") + hello.getJSONObject("longitude").getDouble("m")/60f + (hello.getJSONObject("longitude").getDouble("s") + hello.getJSONObject("longitude").getDouble("ms")/1000f)/(3600f);
+            Log.v("d : ", String.valueOf(hello.getJSONObject("latitude").getDouble("d")));
+            Log.v("m : ", String.valueOf(hello.getJSONObject("latitude").getDouble("m")));
+            Log.v("s : ", String.valueOf(hello.getJSONObject("latitude").getDouble("s")));
+            Log.v("ms : ", String.valueOf(hello.getJSONObject("latitude").getDouble("ms")));
+            Log.v("lat : ", String.valueOf(pos_la));
+            Log.v("lon : ", String.valueOf(pos_lo));
             temperature = hello.getLong("tp");
 
 
@@ -115,6 +122,7 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
 
         if (temperature >= temperatureFeu) {
             notificationDialog();
+            Log.v("feu detecte : ", "ici");
             databaseReference = FirebaseDatabase.getInstance().getReference("Historique");
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -122,9 +130,14 @@ public class AsyncJsonData extends AsyncTask<String, Void, JSONObject>  {
                     int cpt=0;
 
                     for(DataSnapshot child : dataSnapshot.getChildren()) {
-                        String p = child.getValue(String.class);
-                        if (p != null ) {
-                            cpt++;
+                        try {
+                            String p = child.getValue(String.class);
+                            if (p != null) {
+                                cpt++;
+                            }
+                        }
+                        catch (DatabaseException e ) {
+                            System.out.println("erreur");
                         }
                     }
                     String zone = "Zone" + cpt;

@@ -3,12 +3,11 @@ package lisa.duterte.hackathon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -61,6 +61,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -95,6 +96,18 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                         .title(String.valueOf(R.string.position_drone)));
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isen, 14));
+
+
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //Récupération des données des capteurs fournies par le serveur oneM2M
+                AsyncJsonData task = new AsyncJsonData(Map.this);
+                task.execute("cse-in/forestDrone/droneData/environement");
             }
 
             @Override
@@ -102,6 +115,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
+
+
+
     }
 
     //Permet de gérer le clique sur le menu

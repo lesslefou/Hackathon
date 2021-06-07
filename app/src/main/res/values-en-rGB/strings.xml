@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hackathon</string>
+    <string name="app_name">Fire Action Protector</string>
     <string name="log_in">Login</string>
     <string name="sign_up">Sign up</string>
     <string name="validate">Enter</string>

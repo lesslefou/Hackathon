@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AsyncJsonData task = new AsyncJsonData(MainActivity.this);
         task.execute("cse-in/forestDrone/droneData/environement");
 
-
     }
 
 
